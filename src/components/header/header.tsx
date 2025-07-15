@@ -19,7 +19,7 @@ function Header() {
     <header >
        <Navbar className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home"><img src='/logo.svg' width={40}></img></Navbar.Brand>
+          <Navbar.Brand href="/"><img src='/logo.svg' width={40}></img></Navbar.Brand>
           <div className="d-flex align-items-center ">
             <div>
                <Button onClick={logout} size="sm">Log Out</Button>

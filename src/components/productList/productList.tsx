@@ -1,4 +1,4 @@
-import { Button, Col, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Row, Table } from "react-bootstrap";
 import { useProductContext } from "../../context/productContext";
 import { useState } from "react";
 import AlertMessage from "../toast/toast";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { addProduct } from "../../services/services";
 import ProductModal from "../modal/productModal";
 import type { Product } from "../../models/product";
+import BarChart from "./../pieChart/pieChart";
 
 const emptyProduct: Product = {
   id: 0, // o undefined si el backend genera el ID
@@ -49,9 +50,10 @@ function ProductList() {
     <AlertMessage show={showToast} onClose={() => setShowToast(false)} message={toastMessage} />
     <h2 className="mt-3">Product List</h2>
     <Button className="m-2" onClick={handleShow}>Add Product</Button>
-    <Row>
-      <Col>
-        <Table striped bordered hover size="sm">
+    <Row className="g-3">
+      <Col  lg={6}>
+      <Card className="p-3 h-100">
+      <Table striped  hover size="sm">
       <thead>
         <tr>
           <th>Product</th>
@@ -78,9 +80,12 @@ function ProductList() {
         ))}
       </tbody>
       </Table>
+      </Card>
       </Col>
-      <Col>
-        Graphic
+      <Col lg={6}>
+        <Card className="p-3 h-100">
+        <BarChart />
+        </Card>
       </Col>
     </Row>
     
