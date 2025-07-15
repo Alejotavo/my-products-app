@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Row, Spinner, Table } from "react-bootstrap";
 import { useProductContext } from "../../context/productContext";
 import { useState } from "react";
 import AlertMessage from "../toast/toast";
@@ -25,6 +25,7 @@ function ProductList() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [loadingId, setLoadingId] = useState<number | null>(null);
 
   const handleShow = () => setShowModal(true);
 
@@ -40,9 +41,14 @@ function ProductList() {
 
 
   const handleDeleteWithToast = async (id: number) => {
+    setLoadingId(id)
+    try{
    await handleDelete(id);
    setToastMessage(`Producto numero ${id} eliminado correctamente`);
    setShowToast(true);
+    }finally {
+    setLoadingId(null); // termino el loading
+  }
   };
 
   return (
@@ -70,7 +76,13 @@ function ProductList() {
               <td>{product.stock}</td>
               <td style={{ whiteSpace: 'nowrap' }}>
                 <div className="d-flex gap-1 justify-content-end">
-                <Button variant="outline-danger" size="sm"   onClick={() => handleDeleteWithToast(product.id)}>Delete</Button>
+                <Button disabled={loadingId === product.id} variant="outline-danger" size="sm"   
+                  onClick={() => handleDeleteWithToast(product.id)}>
+                    Delete
+                    {loadingId === product.id &&  
+                      <Spinner animation="border" variant="danger" size="sm"/>
+                    }
+                  </Button>
                 <Link to={`/product/${product.id}`}>
                   <Button variant="outline-primary" size="sm">Details</Button>
                 </Link>
