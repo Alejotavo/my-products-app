@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { addProduct } from "../../services/services";
 import ProductModal from "../modal/productModal";
 import type { Product } from "../../models/product";
-import BarChart from "./../pieChart/pieChart";
+import BarChart from "../BarChart/BarChart";
 
 const emptyProduct: Product = {
   id: 0, // o undefined si el backend genera el ID
