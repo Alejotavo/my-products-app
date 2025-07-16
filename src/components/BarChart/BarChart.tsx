@@ -42,9 +42,9 @@ function BarChart() {
   };
 
   return (
-     <div style={{ height: `${products.length * 50}px`, width: '100%' }}>
-  <Bar data={data} options={options} />
-</div>
+  <div style={{ height: '400px', width: '100%' }}>
+    <Bar data={data} options={options} />
+  </div>
   );
 }
 

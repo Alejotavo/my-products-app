@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap"
 import Header from "../../components/header/header"
-import ProductList from "../../components/productList/productList"
+import TabControl from "../../components/tabControl/tabControl"
 
 function AdminPage() {
  
@@ -10,7 +10,7 @@ function AdminPage() {
         <Container>
             <Row>
                 <Col >
-                    <ProductList />
+                    <TabControl />
                 </Col>
             </Row>
         </Container>

@@ -7,6 +7,8 @@ import { addProduct } from "../../services/services";
 import ProductModal from "../modal/productModal";
 import type { Product } from "../../models/product";
 import BarChart from "../BarChart/BarChart";
+import PaginationList from "../pagination/pagination";
+import { usePagination } from "../../hook/usePagination";
 
 const emptyProduct: Product = {
   id: 0, // o undefined si el backend genera el ID
@@ -26,6 +28,9 @@ function ProductList() {
   const [toastMessage, setToastMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loadingId, setLoadingId] = useState<number | null>(null);
+
+  const { currentPage, currentItems: currentProducts, setCurrentPage } = usePagination(products, 8);
+ 
 
   const handleShow = () => setShowModal(true);
 
@@ -69,7 +74,7 @@ function ProductList() {
         </tr>
       </thead>
       <tbody>
-         {products.map(product => (
+         {currentProducts.map(product => (
             <tr key={product.id}>
               <td>{product.title}</td>
               <td>${product.price}</td>
@@ -92,6 +97,12 @@ function ProductList() {
         ))}
       </tbody>
       </Table>
+       <PaginationList
+              totalItems={products.length}
+              itemsPerPage={8}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
       </Card>
       </Col>
       <Col lg={6}>
@@ -100,7 +111,6 @@ function ProductList() {
         </Card>
       </Col>
     </Row>
-    
       {showModal && (
       <ProductModal
         product={emptyProduct}

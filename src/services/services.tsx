@@ -23,8 +23,6 @@ export async function getUsers(): Promise<User[]> {
   }
 }
 
-
-
 export async function addProduct(product: Omit<Product, 'id'>): Promise<Product> {
   try {
     const response = await axios.post<Product>(`https://686d6a11c9090c495386453d.mockapi.io/products`, product);
@@ -63,5 +61,16 @@ export const updateProduct = async (updatedProduct: Product) => {
   } catch (error) {
     console.error(`Error al actualizar el producto con ID ${updatedProduct.id}:`, error);
     throw new Error('No se pudo actualizar el producto.');
+  }
+};
+
+export const updateUser = async (updatedUser: User) => {
+  try {
+    const response = await axios.put<User>(
+      `https://686d6a11c9090c495386453d.mockapi.io/users/${updatedUser.id}`, updatedUser );
+    return response.data;
+  } catch (error) {
+    console.error(`Error al actualizar el usuario con ID ${updatedUser.id}:`, error);
+    throw new Error('No se pudo actualizar el usuario.');
   }
 };
