@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getUsers, updateUser } from "../../services/services";
 import { Card, Table } from "react-bootstrap";
 import type { User } from "../../models/user";
+import './userList.css';
+
 
 function UserList() {
       
@@ -49,18 +51,17 @@ useEffect(() => {
                     <td>{user.isAdmin ? 'Admin' : 'No es Admin'}</td>
                     <td>
                       {user.name === 'alejotavo' ? (
-                          <input
-                            type="checkbox"
-                            checked={true} 
+                            <div className="switch-toggle admin">
+                            <input type="checkbox"  checked={true} 
                             disabled
-                            readOnly
-                          />
+                            readOnly  />
+                            <label htmlFor={`toggleSwitch`}></label>
+                          </div>
                         ) : (
-                          <input
-                            type="checkbox"
-                            checked={user.isAdmin}
-                            onChange={() => handleToggleAdmin(user)}
-                          />
+                          <div className="switch-toggle">
+                            <input type="checkbox" id={`toggleSwitch-${user.id}`} checked={user.isAdmin}  onChange={() => handleToggleAdmin(user)} />
+                            <label htmlFor={`toggleSwitch-${user.id}`}></label>
+                          </div>
                         )}
                     </td>
                 </tr>
