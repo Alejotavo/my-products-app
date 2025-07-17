@@ -38,19 +38,30 @@ useEffect(() => {
     <Card className="p-3">
         <Table  striped  hover size="sm">
             <thead>
+              <tr>
                 <th>NAME</th>
+              </tr>
             </thead>
             <tbody>
             {users.map( user => (
-                <tr>
+                <tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.isAdmin ? 'Admin' : 'No es Admin'}</td>
                     <td>
-                        <input
+                      {user.name === 'alejotavo' ? (
+                          <input
+                            type="checkbox"
+                            checked={true} 
+                            disabled
+                            readOnly
+                          />
+                        ) : (
+                          <input
                             type="checkbox"
                             checked={user.isAdmin}
                             onChange={() => handleToggleAdmin(user)}
-                        />
+                          />
+                        )}
                     </td>
                 </tr>
             ))}

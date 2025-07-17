@@ -8,7 +8,8 @@ function TabControl() {
     <Tabs
       defaultActiveKey="users"
       id="uncontrolled-tab-example"
-      className="mb-3"
+      className="my-3"
+      style={{ borderBottom: '1px solid #bdbdbd' }}
     >
       <Tab eventKey="users" title="Users">
         <UserList />
