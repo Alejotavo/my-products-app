@@ -3,11 +3,13 @@ import { getUsers, updateUser } from "../../services/services";
 import { Card, Table } from "react-bootstrap";
 import type { User } from "../../models/user";
 import './userList.css';
+import PreLoad from "../preload/preload";
 
 
 function UserList() {
       
 const [users, setUsers] = useState<User[]>([]); 
+const [loading, setLoading] = useState(false); 
 
 useEffect(() => {
     const fetchUsers = async () => {
@@ -22,23 +24,32 @@ useEffect(() => {
     fetchUsers();
   }, []);
 
+
+
   const handleToggleAdmin = async (user: User) => {
+  setLoading(true);
+
   const updated = { ...user, isAdmin: !user.isAdmin };
 
   try {
     const savedUser = await updateUser(updated);
 
-    setUsers(prev =>
-      prev.map(u => (u.id === savedUser.id ? savedUser : u))
+    setUsers(prev => prev.map(u => (u.id === savedUser.id ? savedUser : u))
+
     );
   } catch (error) {
     console.error('No se pudo actualizar el usuario:', error);
+  }  finally {
+    setLoading(false);
   }
 };
 
+
   return (
     <Card className="p-3">
-        <Table  striped  hover size="sm">
+      <>
+         {loading ?  (<PreLoad />) : (
+           <Table  striped  hover size="sm">
             <thead>
               <tr>
                 <th>NAME</th>
@@ -59,7 +70,12 @@ useEffect(() => {
                           </div>
                         ) : (
                           <div className="switch-toggle">
-                            <input type="checkbox" id={`toggleSwitch-${user.id}`} checked={user.isAdmin}  onChange={() => handleToggleAdmin(user)} />
+                            <input 
+                            type="checkbox" 
+                            id={`toggleSwitch-${user.id}`} 
+                            checked={user.isAdmin}  
+                            onChange={() => handleToggleAdmin(user)} 
+                            />
                             <label htmlFor={`toggleSwitch-${user.id}`}></label>
                           </div>
                         )}
@@ -67,7 +83,9 @@ useEffect(() => {
                 </tr>
             ))}
             </tbody>
-        </Table>
+          </Table>
+         )}
+      </>
     </Card>
   )
 }
