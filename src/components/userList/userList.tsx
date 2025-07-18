@@ -14,17 +14,20 @@ const [loading, setLoading] = useState(false);
 useEffect(() => {
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         const response = await getUsers();
         setUsers(response); 
       } catch (err) {
         console.log("Error al conectar con el servidor", err);
-      }
+      }finally {
+        setLoading(false);
+  }
     };
 
     fetchUsers();
   }, []);
 
-
+ 
 
   const handleToggleAdmin = async (user: User) => {
   setLoading(true);
