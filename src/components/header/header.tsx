@@ -1,5 +1,6 @@
 import { Button, Container, Navbar } from "react-bootstrap"
 import { useAuth } from '../../context/authContext';
+import ThemeToggle from "../themeToggle/themeToggle";
 
 function Header() {
  
@@ -21,6 +22,9 @@ function Header() {
         <Container>
           <Navbar.Brand href="/"><img src='/logo.svg' width={40}></img></Navbar.Brand>
           <div className="d-flex align-items-center ">
+            <div className="mx-3 d-flex">
+                <ThemeToggle />
+            </div>
             <div>
                <Button onClick={logout} size="sm">Log Out</Button>
            </div>
