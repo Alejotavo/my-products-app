@@ -56,6 +56,8 @@ useEffect(() => {
             <thead>
               <tr>
                 <th>NAME</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

@@ -12,6 +12,7 @@ import LogIn from './pages/logIn/logIn';
 import AdminPage from './pages/Admin/adminPage';
 import ProductDetails from './components/productDetails/productDetails';
 import RegularUserPage from './pages/user/regularUserPage';
+import { ThemeProvider } from './context/themeContext';
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -30,6 +31,7 @@ function AppRoutes() {
 
 function App() {
   return (
+    <ThemeProvider>
       <ProductProvider>
         <AuthProvider>
           <BrowserRouter>
@@ -37,6 +39,7 @@ function App() {
           </BrowserRouter>
         </AuthProvider>
       </ProductProvider>
+    </ThemeProvider>
   );
 }
 

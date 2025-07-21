@@ -1,4 +1,4 @@
-import { Button, Container, Dropdown, Navbar } from "react-bootstrap"
+import { Container, Dropdown, Navbar } from "react-bootstrap"
 import { useAuth } from '../../context/authContext';
 import ThemeToggle from "../themeToggle/themeToggle";
 

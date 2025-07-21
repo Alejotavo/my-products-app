@@ -1,16 +1,19 @@
-import { useState } from "react";
+
 import "./themeToggle.css";
+import { useTheme } from './../../context/themeContext';
 
 function ThemeToggle() {
 
-const [checked, setChecked] = useState(true);
+const { theme, toggleTheme } = useTheme();
+
+
 
   return (
     <div className="theme-toggle">
         <input type="checkbox" 
             id="theme-toggle"
-            checked={checked}  
-            onChange={(e) => setChecked(e.target.checked)} 
+            checked={theme === 'dark'}  
+            onChange={toggleTheme} 
         />
         <label  htmlFor="theme-toggle"></label>
     </div>
